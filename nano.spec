@@ -1,20 +1,18 @@
-%define directory_down %(echo %version|perl -n -e  '/^(\d+\.\d+).*$/; print \$1 ')
-
 %bcond_with tiny
 
-Summary:        Nano is a tiny console text editor that aims to emulate Pico 
 Name:           nano
-Version:        2.0.3
+Version:        2.0.5
 Release:        %mkrel 1
+Summary:        Tiny console text editor that aims to emulate Pico 
 License:        GPL
 Group:          Editors
 URL:            http://www.nano-editor.org/
 Source0:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz
 Source1:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz.asc
 Source2:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz.md5
-Requires(post): rpm-helper
-Requires(postun): rpm-helper
-BuildRequires:  ncurses-devel
+Requires(post): info-install
+Requires(postun): info-install
+BuildRequires:  libncurses-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -23,7 +21,7 @@ TIP (TIP Isn't Pico). It aims to emulate Pico as closely as
 possible while also offering a few enhancements.
 
 Build Options:
---with tiny      builds a minimal editor without extra functionality
+--with tiny     builds a minimal editor without extra functionality
 
 %prep
 %setup -q
@@ -69,5 +67,3 @@ Build Options:
 %lang(fr) %{_mandir}/fr/man1/rnano.1*
 %lang(fr) %{_mandir}/fr/man5/nanorc.5*
 %config(noreplace) %{_sysconfdir}/nanorc
-
-
