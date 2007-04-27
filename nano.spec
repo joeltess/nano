@@ -1,7 +1,7 @@
 %bcond_with tiny
 
 Name:           nano
-Version:        2.0.5
+Version:        2.0.6
 Release:        %mkrel 1
 Summary:        Tiny console text editor that aims to emulate Pico 
 License:        GPL
