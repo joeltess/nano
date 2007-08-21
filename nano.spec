@@ -11,7 +11,7 @@ Source0:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz
 Source1:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz.asc
 Source2:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz.md5
 Requires(post): info-install
-Requires(postun): info-install
+Requires(preun): info-install
 BuildRequires:  libncurses-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -47,7 +47,7 @@ Build Options:
 %post
 %_install_info %{name}.info
 
-%postun
+%preun
 %_remove_install_info %{name}.info
 
 %clean
