@@ -13,7 +13,6 @@ Source2:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz.md5
 Requires(post): info-install
 Requires(preun): info-install
 BuildRequires:  libncurses-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 nano (Nano's ANOther editor) is the editor formerly known as 
