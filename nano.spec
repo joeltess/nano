@@ -11,6 +11,7 @@ Source0:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz
 Patch0:		nano-glibc28.diff
 Requires(post): info-install
 Requires(preun): info-install
+BuildRequires:	ncurses-devel
 BuildRequires:  ncursesw-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
