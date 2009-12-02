@@ -1,14 +1,13 @@
 %bcond_with tiny
 
 Name:           nano
-Version:        2.0.9
-Release:        %mkrel 2
+Version:        2.2.0
+Release:        %mkrel 1
 Summary:        Tiny console text editor that aims to emulate Pico 
 License:        GPLv3
 Group:          Editors
 URL:            http://www.nano-editor.org/
 Source0:        http://www.nano-editor.org/dist/v2.0/nano-%{version}.tar.gz
-Patch0:		nano-glibc28.diff
 Requires(post): info-install
 Requires(preun): info-install
 BuildRequires:	ncurses-devel
@@ -24,9 +23,7 @@ Build Options:
 --with tiny     builds a minimal editor without extra functionality
 
 %prep
-
 %setup -q
-#patch0 -p0
 
 %build
 %configure2_5x \
