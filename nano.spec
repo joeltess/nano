@@ -2,7 +2,7 @@
 
 Name:           nano
 Version:        2.2.4
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        Tiny console text editor that aims to emulate Pico 
 License:        GPLv3
 Group:          Editors
