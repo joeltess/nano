@@ -1,18 +1,24 @@
 %bcond_with tiny
 
-Name:           nano
-Version:        2.2.4
-Release:        %mkrel 2
-Summary:        Tiny console text editor that aims to emulate Pico 
-License:        GPLv3
-Group:          Editors
-URL:            http://www.nano-editor.org/
-Source0:        http://www.nano-editor.org/dist/v2.2/nano-%{version}.tar.gz
-Requires(post): info-install
-Requires(preun): info-install
+Name:		nano
+Version:	2.3.1
+Release:	%mkrel 1
+Summary:	Tiny console text editor that aims to emulate Pico
+License:	GPLv3
+Group:		Editors
+URL:		http://www.nano-editor.org/
+Source0:	http://www.nano-editor.org/dist/v2.3/%{name}-%{version}.tar.gz
+Patch0:		nano-2.3.0-warnings.patch
+# http://lists.gnu.org/archive/html/nano-devel/2010-08/msg00004.html
+Patch1:		0001-check-stat-s-result-and-avoid-calling-stat-on-a-NULL.patch
+# http://lists.gnu.org/archive/html/nano-devel/2010-08/msg00005.html
+Patch2:		0002-use-futimens-if-available-instead-of-utime.patch
+%if %{mdvver} < 201200
+Requires(post):		info-install
+Requires(preun):	info-install
+%endif
 BuildRequires:	ncurses-devel
-BuildRequires:  ncursesw-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	ncursesw-devel
 
 %description
 nano (Nano's ANOther editor) is the editor formerly known as 
@@ -24,6 +30,9 @@ Build Options:
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %configure2_5x \
@@ -35,34 +44,37 @@ Build Options:
 %make
 
 %install
-%{__rm} -rf %{buildroot}
+%__rm -rf %{buildroot}
 %makeinstall_std
 
-%{__mkdir_p} %{buildroot}%{_sysconfdir}
-%{__cp} -a doc/nanorc.sample %{buildroot}%{_sysconfdir}/nanorc
+#config file
+%__install -Dpm644 doc/nanorc.sample %{buildroot}%{_sysconfdir}/nanorc
 
-%find_lang %{name}
+#disable line wrapping by default
+%__sed -i -e 's/# set nowrap/set nowrap/' %{buildroot}%{_sysconfdir}/nanorc
 
+%find_lang %{name} --with-man --all-name
+
+%if %{mdvver} < 201200
 %post
 %_install_info %{name}.info
 
 %preun
 %_remove_install_info %{name}.info
+%endif
 
 %clean
-%{__rm} -rf %{buildroot} 
+%__rm -rf %{buildroot}
 
 %files -f %{name}.lang
-%defattr(0644,root,root,0755)
-%doc ABOUT-NLS AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README THANKS TODO UPGRADE nano.spec doc/faq.html
-%attr(0755,root,root) %{_bindir}/nano
-%attr(0755,root,root) %{_bindir}/rnano
+%doc AUTHORS BUGS ChangeLog NEWS README THANKS TODO UPGRADE
+%doc doc/faq.html doc/nanorc.sample
+%{_bindir}/nano
+%{_bindir}/rnano
 %{_datadir}/nano
 %{_infodir}/nano.info*
 %{_mandir}/man1/nano.1*
 %{_mandir}/man1/rnano.1*
 %{_mandir}/man5/nanorc.5*
-%lang(fr) %{_mandir}/fr/man1/nano.1*
-%lang(fr) %{_mandir}/fr/man1/rnano.1*
-%lang(fr) %{_mandir}/fr/man5/nanorc.5*
 %config(noreplace) %{_sysconfdir}/nanorc
+
