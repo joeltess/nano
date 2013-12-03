@@ -1,6 +1,13 @@
+From 8d618f769b1e66a26e7b790e4e94b2c3dca68d31 Mon Sep 17 00:00:00 2001
+From: Kamil Dudka <kdudka@redhat.com>
+Date: Tue, 26 Mar 2013 16:20:27 +0100
+Subject: [PATCH] fix compile-time warnings in nano-2.3.2
+
+---
  po/Makefile.in.in |    1 +
  src/nano.c        |    2 +-
- 2 files changed, 2 insertions(+), 1 deletions(-)
+ src/search.c      |    2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/po/Makefile.in.in b/po/Makefile.in.in
 index ada8bb4..f7b2a95 100644
@@ -15,10 +22,10 @@ index ada8bb4..f7b2a95 100644
  localedir = $(datadir)/locale
  gettextsrcdir = $(datadir)/gettext/po
 diff --git a/src/nano.c b/src/nano.c
-index 269ab29..5b605bf 100644
+index 9d2332d..c315768 100644
 --- a/src/nano.c
 +++ b/src/nano.c
-@@ -1925,7 +1925,7 @@ precalc_cleanup:
+@@ -1934,7 +1934,7 @@ precalc_cleanup:
   * TRUE. */
  void do_output(char *output, size_t output_len, bool allow_cntrls)
  {
@@ -28,15 +35,17 @@ index 269ab29..5b605bf 100644
      int char_buf_len;
  
 diff --git a/src/search.c b/src/search.c
-index ca93098..3451600 100644
+index 74bfb07..77b2097 100644
 --- a/src/search.c
 +++ b/src/search.c
-@@ -138,7 +138,7 @@ int search_init(bool replacing, bool use_answer)
-     int i = 0;
-     char *buf;
-     sc *s;
--    void (*func)(void);
-+    void (*func)(void) = (void (*)(void))0;
-     bool meta_key = FALSE, func_key = FALSE;
-     static char *backupstring = NULL;
- 	/* The search string we'll be using. */
+@@ -219,7 +219,7 @@ int search_init(bool replacing, bool use_answer)
+ 	statusbar(_("Cancelled"));
+ 	return -1;
+     } else {
+-	void (*func)(void);
++	void (*func)(void) = (void (*)(void)) 0;
+ 
+ 	for  (s = sclist; s != NULL; s = s->next)
+ 	    if ((s->menu & currmenu) && i == s->seq) {
+-- 
+1.7.1

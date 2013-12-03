@@ -1,2 +1,4 @@
+removed_sources:
+  nano-2.3.1.tar.gz: bd1993189f82649b4960b1ccd7142a61f43f2993
 sources:
-  "nano-2.3.1.tar.gz": bd1993189f82649b4960b1ccd7142a61f43f2993
+  nano-2.3.2.tar.gz: 5d4bed4f15088fc3cba0650a89bd343b061f456d

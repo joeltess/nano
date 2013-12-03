@@ -11,9 +11,9 @@ diff --git a/src/files.c b/src/files.c
 index f6efbf1..99cc1b8 100644
 --- a/src/files.c
 +++ b/src/files.c
-@@ -103,6 +103,24 @@ void initialize_buffer_text(void)
-     openfile->totsize = 0;
- }
+@@ -306,6 +306,24 @@ int do_lockfile(const char *filename)
+ #endif /* NANO_TINY */
+ 
  
 +#ifndef NANO_TINY
 +/* If *pstat is NULL, perform a stat call with the given file name.  On success,
@@ -36,7 +36,7 @@ index f6efbf1..99cc1b8 100644
  /* If it's not "", filename is a file to open.  We make a new buffer, if
   * necessary, and then open and read the file, if applicable. */
  void open_buffer(const char *filename, bool undoable)
-@@ -148,11 +166,7 @@ void open_buffer(const char *filename, bool undoable)
+@@ -351,11 +369,7 @@ void open_buffer(const char *filename, bool undoable)
      if (rc > 0) {
  	read_file(f, rc, filename, undoable, new_buffer);
  #ifndef NANO_TINY
@@ -49,7 +49,7 @@ index f6efbf1..99cc1b8 100644
  #endif
      }
  
-@@ -1532,8 +1546,8 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
+@@ -1741,8 +1755,8 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
       * specified it interactively), stat and save the value
       * or else we will chase null pointers when we do
       * modtime checks, preserve file times, etc. during backup */
@@ -60,7 +60,7 @@ index f6efbf1..99cc1b8 100644
  
      /* We backup only if the backup toggle is set, the file isn't
       * temporary, and the file already exists.  Furthermore, if we
-@@ -1924,7 +1938,10 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
+@@ -2134,7 +2148,10 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
  	if (openfile->current_stat == NULL)
  	    openfile->current_stat =
  		(struct stat *)nmalloc(sizeof(struct stat));

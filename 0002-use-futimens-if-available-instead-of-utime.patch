@@ -28,7 +28,7 @@ diff --git a/configure b/configure
 index 02733c7..1805e53 100755
 --- a/configure
 +++ b/configure
-@@ -7484,7 +7484,7 @@ fi
+@@ -7362,7 +7362,7 @@ fi
  
  
  
@@ -41,7 +41,7 @@ diff --git a/configure.ac b/configure.ac
 index 66f8ee3..f4975d3 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -415,7 +415,7 @@ fi])
+@@ -414,7 +414,7 @@ fi])
  
  dnl Checks for functions.
  
@@ -54,7 +54,7 @@ diff --git a/src/files.c b/src/files.c
 index 99cc1b8..9a1bdcc 100644
 --- a/src/files.c
 +++ b/src/files.c
-@@ -1455,6 +1455,29 @@ int copy_file(FILE *inn, FILE *out)
+@@ -1665,6 +1665,29 @@ int copy_file(FILE *inn, FILE *out)
      return retval;
  }
  
@@ -84,7 +84,7 @@ index 99cc1b8..9a1bdcc 100644
  /* Write a file out to disk.  If f_open isn't NULL, we assume that it is
   * a stream associated with the file, and we don't try to open it
   * ourselves.  If tmp is TRUE, we set the umask to disallow anyone else
-@@ -1694,6 +1717,18 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
+@@ -1904,6 +1927,18 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
  	fprintf(stderr, "Backing up %s to %s\n", realname, backupname);
  #endif
  
@@ -103,7 +103,7 @@ index 99cc1b8..9a1bdcc 100644
  	/* Copy the file. */
  	copy_status = copy_file(f, backup_file);
  
-@@ -1704,19 +1739,6 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
+@@ -1914,19 +1949,6 @@ bool write_file(const char *name, FILE *f_open, bool tmp, append_type
  	    goto cleanup_and_exit;
  	}
  
