@@ -1,20 +1,19 @@
 Name:		nano
-Version:	2.3.2
+Version:	2.3.3
 Release:	1
 Summary:	Tiny console text editor that aims to emulate Pico
 License:	GPLv3
 Group:		Editors
 URL:		http://www.nano-editor.org/
 Source0:	http://www.nano-editor.org/dist/v2.3/%{name}-%{version}.tar.gz
-Patch0:		nano-2.3.2-warnings.patch
-
+Patch0:          nano-2.3.3-warnings.patch
 # http://lists.gnu.org/archive/html/nano-devel/2010-08/msg00004.html
-Patch1:		0001-check-stat-s-result-and-avoid-calling-stat-on-a-NULL.patch
-
+Patch1:          0001-check-stat-s-result-and-avoid-calling-stat-on-a-NULL.patch
 # http://lists.gnu.org/archive/html/nano-devel/2010-08/msg00005.html
-Patch2:		0002-use-futimens-if-available-instead-of-utime.patch
+Patch2:          0002-use-futimens-if-available-instead-of-utime.patch
 BuildRequires:	ncurses-devel
 BuildRequires:	ncursesw-devel
+BuildRequires:	texinfo
 
 %description
 nano (Nano's ANOther editor) is the editor formerly known as
@@ -23,16 +22,14 @@ possible while also offering a few enhancements.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%apply_patches
 
 %build
 # do not run autotools, we have already reflected the configure.ac
 # changes in configure and config.h.in
 touch -c aclocal.m4 config.h.in configure Makefile.in
 
-%configure2_5x
+%configure
 %make
 
 %install
