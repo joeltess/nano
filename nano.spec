@@ -56,7 +56,7 @@ EOF
 %find_lang %{name} --with-man --all-name
 
 %files -f %{name}.lang
-%doc AUTHORS BUGS ChangeLog NEWS README THANKS TODO UPGRADE
+%doc AUTHORS  ChangeLog NEWS README THANKS TODO UPGRADE
 %doc doc/faq.html doc/nanorc.sample
 %{_bindir}/nano
 %{_bindir}/rnano
