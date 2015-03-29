@@ -3,5 +3,6 @@ removed_sources:
   nano-2.3.2.tar.gz: 5d4bed4f15088fc3cba0650a89bd343b061f456d
   nano-2.3.3.tar.gz: 877c23050245810614ca937d9f07210c293c1a3d
   nano-2.3.4.tar.gz: 1e315518b59755ab23f86b95786d55ebcc02941a
-sources:
   nano-2.3.6.tar.gz: 7dd39f21bbb1ab176158e0292fd61c47ef681f6d
+sources:
+  nano-2.4.0.tar.gz: 55639cbac2d38febf16780b912b036f2023534d1
