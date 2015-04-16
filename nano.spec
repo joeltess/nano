@@ -1,11 +1,11 @@
 Name:		nano
-Version:	2.4.0
+Version:	2.4.1
 Release:	1
 Summary:	Tiny console text editor that aims to emulate Pico
 License:	GPLv3
 Group:		Editors
 URL:		http://www.nano-editor.org/
-Source0:	http://www.nano-editor.org/dist/v2.3/%{name}-%{version}.tar.gz
+Source0:	http://www.nano-editor.org/dist/v2.4/%{name}-%{version}.tar.gz
 Patch0:          nano-2.3.3-warnings.patch
 # http://lists.gnu.org/archive/html/nano-devel/2010-08/msg00004.html
 Patch1:          0001-check-stat-s-result-and-avoid-calling-stat-on-a-NULL.patch
